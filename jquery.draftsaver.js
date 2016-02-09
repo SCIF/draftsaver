@@ -47,7 +47,7 @@
         var fields = form.find(input_selector).not(settings.ignoreSelector);
 
         function is_changed(field) {
-            return (field.data('old-draft-text') != field.val());
+            return (field.data('old-draft-text') != field_value(field));
         }
 
         function save_draft(data) {
@@ -58,19 +58,37 @@
             jQuery.ajax(temp);
         }
 
+        function field_value(field) {
+            var val;
+            field = $(field);
+
+            if (field.is(':checkbox')) {
+                val = field.is(':checked') ? 1 : false;
+            } else {
+                val = field.val();
+            }
+
+            return val;
+        }
+
         var action = function () {
             var changed_data = {};
             var changed = false;
 
             fields.each(function () {
                 var field = $(this);
+                var value = field_value(field);
 
                 if (is_changed(field)) {
                     changed = true;
-                    changed_data[field.attr('name')] = field.val();
-                    field.data('old-draft-text', field.val());
-                } else if ( ! settings.updateOnlyChanged) {
-                    changed_data[field.attr('name')] = field.val();
+
+                    if (false != value) {
+                        changed_data[field.attr('name')] = value;
+                    }
+
+                    field.data('old-draft-text', value);
+                } else if ( ! settings.updateOnlyChanged && false != value) {
+                    changed_data[field.attr('name')] = field_value(field);
                 }
             });
 
@@ -81,7 +99,7 @@
 
         // fills buffers by initial data
         fields.each(function () {
-            $(this).data('old-draft-text', $(this).val());
+            $(this).data('old-draft-text', field_value(this));
         });
 
         intervalId = setInterval(action, settings.updateInterval);
