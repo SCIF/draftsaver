@@ -5,8 +5,8 @@
 (function ($) {
     $.fn.draftsaver = function (options) {
         var intervalId;
-        options = options || {};
 
+        options = options || {};
 
         if ('string' == typeof(options) && 'stop' == options) {
             intervalId && clearInterval(intervalId);
@@ -79,16 +79,23 @@
                 var field = $(this);
                 var value = field_value(field);
 
+                if (settings.fields.length > 0
+                    && -1 === jQuery.inArray(field.attr('name'), settings.fields)) {
+                    return;
+                }
+
                 if (is_changed(field)) {
                     changed = true;
 
-                    if (false != value) {
+                    if (false != value || ! settings.updateOnlyChanged) {
                         changed_data[field.attr('name')] = value;
+                    } else {
+                        console.log('skipped to update');
                     }
 
                     field.data('old-draft-text', value);
-                } else if ( ! settings.updateOnlyChanged && false != value) {
-                    changed_data[field.attr('name')] = field_value(field);
+                } else if ( ! settings.updateOnlyChanged) {
+                    changed_data[field.attr('name')] = value;
                 }
             });
 
