@@ -1,6 +1,6 @@
 {
   "name": "jquery.draftsaver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple jQuery plugin to simplify routines of form «autosave».",
   "main": "src/jquery.draftsaver.js",
   "dependencies": {
@@ -16,5 +16,5 @@
   "homepage": "https://github.com/SCIF/draftsaver#readme",
   "bugs": {
     "url": "https://github.com/SCIF/draftsaver/issues"
-  },
+  }
 }
