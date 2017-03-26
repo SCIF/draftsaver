@@ -1,6 +1,6 @@
 {
   "name": "jquery.draftsaver",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "A simple jQuery plugin to simplify routines of form «autosave».",
   "main": "src/jquery.draftsaver.js",
   "repository": {
