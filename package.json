@@ -1,0 +1,13 @@
+{
+  "name": "jquery.draftsaver",
+  "version": "1.0",
+  "description": "A simple jQuery plugin to simplify routines of form «autosave».",
+  "main": "src/jquery.draftsaver.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/SCIF/draftsaver.git"
+  },
+  "author": "Alexander Zhuravlev",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
